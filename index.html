@@ -10,29 +10,6 @@
 </head>
 <body>
 
-    <!--<header>
-        <div class="header-content">
-            <div class="logo"><img id="logo" src="https://images.pexels.com/photos/163943/pexels-photo-163943.jpeg" alt="logo"></div>
-            <h2>SimoG's Bookstore</h2>
-        </div>
-
-        <div class="search-bar">
-            <input type="text" placeholder="Search..." />
-            <button>🔍</button>
-        </div>
-    </header>
-
-    <nav>
-        <ul class="nav-list">
-            <li>Home </li>
-            <li>Saved Books </li>
-            <li>Genres </li>
-            <li>Continue Reading </li>
-            <li>Settings </li>
-            <li>About </li>
-        </ul>
-    </nav> -->
-
      <!-- Sidebar -->
   <nav class="sidebar">
     <h2>📚 SimoG's Bookstore</h2>
@@ -59,23 +36,45 @@
 
         <!--Books-->
         <div id="library">
-        <div class="book read">
+        <div class="book read" onclick="toggleExpand(this)">
             <img src="/home/simog/Downloads/9f26adfc499f9c409570ff3682717983.jpg" alt="book-cover" class="book-cover">
             <div class="title">Vinland Saga</div>
+
+            <div class="book-details">
+                <p>✍️ Author: Makoto Yukimura</p>
+                <p>🌐 Language: Japanese</p>
+                <p><i class="fa-solid fa-file"></i> Pages: 369</p>
+                <p>📅 Year: 2005</p>
+                
+            </div>              
     
             <button class="toggle-btn">📖 <span class="status">Read</span></button> 
         </div>
 
-        <div class="book not-read">
+        <div class="book not-read" onclick="toggleExpand(this)">
             <img src="/home/simog/Downloads/ca6722a0a87ce4ede4cf0e2e4e9e12cd.jpg" alt="book-cover" class="book-cover">
             <div class="title">Jojo's Stone Ocean</div>
+
+            <div class="book-details">
+                <p>✍️ Author: Hirohiko Araki</p>
+                <p>🌐 Language: Japanese</p>
+                <p><i class="fa-solid fa-file"></i> Pages: 287</p>
+                <p>📅 Year: 1999</p>
+            </div> 
      
             <button class="toggle-btn">📖 <span class="status">Not Read</span></button>
         </div>
 
-        <div class="book read">
+        <div class="book read" onclick="toggleExpand(this)">
             <img src="/home/simog/Downloads/ae4d1de7bcefffbaf3dcfdf483d192b5.jpg" alt="book-cover" class="book-cover">
             <div class="title">Hajime No Ippo</div>
+
+            <div class="book-details">
+                <p>✍️ Author: George Morikawa</p>
+                <p>🌐 Language: Japanese</p>
+                <p><i class="fa-solid fa-file"></i> Pages: 324</p>
+                <p>📅 Year: 1989</p>
+            </div> 
             
             <button class="toggle-btn">📖 <span class="status">Read</span></button>
         </div>
@@ -118,7 +117,7 @@
               <input type="text" id="language" required>
             </div>
           
-            <button type="submit" onclick="addBook()">Add Book</button>
+            <button type="button" onclick="addBook()">Add Book</button>
           </form>
           
           </form>
