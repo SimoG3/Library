@@ -74,10 +74,11 @@ function addBook() {
 
 
  //form pop up page
-function openModal() {
-  document.getElementById("myModal").style.display = "block";
+document.getElementById("add-book").addEventListener("click", function () {
+  document.getElementById("modal").classList.remove("hidden");
+});
+
+ function closeModal() {
+  document.getElementById("modal").classList.add("hidden");
 }
 
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
-}
