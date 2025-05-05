@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <header> 
+        <div class="logo"><img id="logo" src="https://images.pexels.com/photos/163943/pexels-photo-163943.jpeg" alt="logo"></div>
+        <h2>SimoG's Bookstore</h2>
+        
+
+    </header>
+
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Saved Books</li>
+            <li>Genres</li>
+            <li>Continue Reading</li>
+            <li>Settings</li>
+            <li>About</li>
+        </ul>
+    </nav>
+
+    <div id="body" class="body">
+
+        <div class="book read">
+            <img src="" alt="book-cover" class="book-cover">
+            <div class="title">Vinland Saga</div>
+    
+            <button class="toggle-btn">📖 <span class="status">Read</span></button> 
+        </div>
+
+        <div class="book not-read">
+            <img src="" alt="book-cover" class="book-cover">
+            <div class="title">Jojo's Stone Ocean</div>
+     
+            <button class="toggle-btn">📖 <span class="status">Not Read</span></button>
+        </div>
+
+        <div class="book read">
+            <img src="" alt="book-cover" class="book-cover">
+            <div class="title">Hajime No Ippo</div>
+            
+            <button class="toggle-btn">📖 <span class="status">Read</span></button>
+        </div>
+
+      <button id="add-book" onclick="addBook()">+</button>
+
+    </div>
+
+
+    <script src="script.js" defer></script>
+</body>
+</html>
