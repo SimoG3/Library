@@ -52,11 +52,11 @@ function addBook() {
     languageDetail.textContent = "🌐 Language:" + newBook.language;
 
     const pagesDetail = document.createElement("p");
-    pagesDetail.textContent = " Pages:" + newBook.pages;
+    pagesDetail.textContent = " Pages:" + newBook.pages;  
     pagesDetail.prepend(icon);
 
     const yearDetail = document.createElement("p");
-    pagesDetail.textContent = "📅 Year: " + newBook.year;
+    yearDetail.textContent = "📅 Year: " + newBook.year;
 
     //appending to book details div
     bookDetails.appendChild(authorDetail);
