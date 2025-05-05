@@ -27,7 +27,7 @@ function addBook() {
     coverImg.alt = "book-cover";
     coverImg.classList.add("book-cover");
   
-    const library = document.getElementById("body");
+    const library = document.getElementById("library");
   
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
@@ -68,3 +68,16 @@ function addBook() {
      }
    });
  });
+
+ //favorite toggle button
+ //code...
+
+
+ //form pop up page
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
