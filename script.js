@@ -37,7 +37,7 @@ function addBook() {
     titleDiv.textContent = newBook.name;
 
     const coverImg = document.createElement("img"); //book cover
-    coverImg.src = "/images/35b9674b3a90fffb83a33d1075d28662.jpg";
+    coverImg.src = "images/book.jpg";
     coverImg.alt = "book-cover";
     coverImg.classList.add("book-cover");
 
