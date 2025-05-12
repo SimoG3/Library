@@ -11,11 +11,19 @@ function Book(name, author, pages, year, language) {
 
 //add books to library
 function addBook() {
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = document.getElementById("pages").value;
-    const year = document.getElementById("year").value;
-    const language = document.getElementById("language").value;
+
+  const form = document.getElementById("bookForm");
+
+    if (!form.checkValidity()) {
+        form.reportValidity(); // shows native browser validation messages
+        return;
+    }
+    
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const pages = document.getElementById("pages").value.trim();
+    const year = document.getElementById("year").value.trim();
+    const language = document.getElementById("language").value.trim();
 
     const newBook = new Book(title, author, pages, year, language); //creating constructed book
 
@@ -91,6 +99,8 @@ function addBook() {
     bookDiv.appendChild(toggleButton);
     
     library.appendChild(bookDiv);
+
+    form.reset();
 }
 
 
@@ -135,5 +145,17 @@ document.getElementById("add-book").addEventListener("click", function () {
 }
 
 
-//link form to the made book
+//welcome pop up 
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const overlay = document.getElementById('welcome-overlay');
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 1000); // matches the CSS transition
+  }, 2000); // visible for 3 seconds
+});
+
+
 

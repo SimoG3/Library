@@ -10,6 +10,11 @@
 </head>
 <body>
 
+  <!--Welcome-->
+  <div id="welcome-overlay">
+     <div id="welcome-message">Welcome to my Library!</div>
+  </div>
+
      <!-- Sidebar -->
   <nav class="sidebar">
     <h2>📚 SimoG's Bookstore</h2>
@@ -84,7 +89,7 @@
          <div class="modal-content">
            <span onclick="closeModal()" class="close">&times;</span>
 
-           <form class="book-form">
+           <form class="book-form" id="bookForm">
             <h2>Add a Book</h2>
           
             <div class="form-group">
@@ -118,8 +123,6 @@
             </div>
           
             <button type="button" onclick="addBook()">Add Book</button>
-          </form>
-          
           </form>
           
          </div>
