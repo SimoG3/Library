@@ -18,7 +18,7 @@ function addBook() {
         form.reportValidity(); // shows native browser validation messages
         return;
     }
-    
+
     const title = document.getElementById("title").value.trim();
     const author = document.getElementById("author").value.trim();
     const pages = document.getElementById("pages").value.trim();
@@ -148,14 +148,27 @@ document.getElementById("add-book").addEventListener("click", function () {
 //welcome pop up 
 
 window.addEventListener('load', () => {
+  const message = document.getElementById('welcome-message');
+  const overlay = document.getElementById('welcome-overlay');
+
+  // Force a reflow to ensure animation triggers
+  void message.offsetWidth; // triggers reflow
+
+  // Animate in
+  message.classList.remove('hidden');
+  message.classList.add('visible');
+
+  // Fade out overlay after 3 seconds
   setTimeout(() => {
-    const overlay = document.getElementById('welcome-overlay');
     overlay.style.opacity = '0';
     setTimeout(() => {
       overlay.style.display = 'none';
-    }, 1000); // matches the CSS transition
-  }, 2000); // visible for 3 seconds
+    }, 1000); // matches CSS fade duration
+  }, 3000);
 });
+
+
+
 
 
 
