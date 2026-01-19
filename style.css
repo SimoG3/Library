@@ -109,9 +109,10 @@ input, button { font-family: inherit; outline: none; }
 
 /* Library Grid */
 #library {
-    padding: 0 40px 100px 40px; /* Bottom padding for FAB */
+    padding: 0 40px 100px 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    /* This forces columns to be exactly 240px wide */
+    grid-template-columns: repeat(auto-fill, 240px); 
     gap: 30px;
     align-items: start;
 }
@@ -221,13 +222,24 @@ input, button { font-family: inherit; outline: none; }
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100; /* KEEPS BUTTON ON TOP */
 }
+
 #add-book:hover { background-color: var(--primary-hover); transform: scale(1.1) rotate(90deg); }
 
 /* Modal Styling */
 .modal {
+    display: flex;          /* Changed from none to flex to center content */
+    position: fixed;        /* Stay in place */
+    z-index: 1000;         /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;           /* Full width */
+    height: 100%;          /* Full height */
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(4px);
+    align-items: center;    /* Center vertically */
+    justify-content: center; /* Center horizontally */
 }
 .modal-content {
     background: white;
@@ -236,6 +248,7 @@ input, button { font-family: inherit; outline: none; }
     box-shadow: var(--shadow-lg);
     width: 450px;
     overflow: hidden;
+    animation: modalSlideUp 0.3s ease-out;
 }
 .modal-header {
     background: var(--bg-color);
@@ -245,6 +258,11 @@ input, button { font-family: inherit; outline: none; }
     align-items: center;
     border-bottom: 1px solid #e2e8f0;
 }
+@keyframes modalSlideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 .modal-header h2 { margin: 0; font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-main); }
 .close { font-size: 1.5rem; cursor: pointer; transition: 0.2s; }
 .close:hover { color: var(--danger); }
@@ -279,9 +297,20 @@ input, button { font-family: inherit; outline: none; }
 
 /* Welcome Animation */
 #welcome-overlay {
-    background: white;
-    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;       /* Force 100% Viewport Width */
+    height: 100vh;      /* Force 100% Viewport Height */
+    background-color: #f3f4f6; /* Match your background color or white */
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;     /* Ultra high Z-Index to sit on top of everything */
+    transition: opacity 1s ease-out;
 }
+
 #welcome-message {
     text-align: center;
     color: var(--text-main);
@@ -292,4 +321,6 @@ input, button { font-family: inherit; outline: none; }
 }
 #welcome-message i { font-size: 3rem; color: var(--primary); }
 #welcome-message span { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; }
-.hidden { display: none !important; }
+.hidden { 
+    display: none !important; 
+}
