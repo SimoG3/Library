@@ -3,138 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>My Modern Library</title>
 </head>
 <body>
 
-  <!--Welcome-->
   <div id="welcome-overlay">
-    <div id="welcome-message" class="hidden">Welcome to my Library!</div>
+    <div id="welcome-message" class="hidden">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Welcome to the Library</span>
+    </div>
   </div>
   
-
-     <!-- Sidebar -->
-  <nav class="sidebar">
-    <h2>📚 SimoG's Bookstore</h2>
-    <ul>
-      <li><i class="fas fa-home"></i> Home</li>
-      <li><i class="fas fa-bookmark"></i> Saved Books</li>
-      <li><i class="fas fa-list"></i> Genres</li>
-      <li><i class="fas fa-play"></i> Continue Reading</li>
-      <li><i class="fas fa-cog"></i> Settings</li>
-      <li><i class="fas fa-info-circle"></i> About</li>
-    </ul>
-  </nav>
-
-    <div id="body" class="body main-content">
-
-        <!-- Header -->
-    <header class="topbar">
-        <div class="logo"><i class="fa-solid fa-door-open"></i> Welcome Reader !</div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search books..." />
-          <button><i class="fas fa-search"></i></button>
+  <div class="app-container">
+      <nav class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-layer-group"></i>
+            <h2>SimoG's Books</h2>
         </div>
-    </header>
+        <ul>
+          <li class="active"><i class="fas fa-home"></i> Home</li>
+          <li><i class="fas fa-bookmark"></i> Saved Books</li>
+          <li><i class="fas fa-list"></i> Genres</li>
+          <li><i class="fas fa-chart-simple"></i> Statistics</li>
+          <li><i class="fas fa-cog"></i> Settings</li>
+        </ul>
+        <div class="sidebar-footer">
+            <li><i class="fas fa-sign-out-alt"></i> Log Out</li>
+        </div>
+      </nav>
 
-        <!--Books-->
+      <div id="body" class="body main-content">
+
+        <header class="topbar">
+            <div class="user-welcome">
+                <h1>Library Dashboard</h1>
+                <p>Manage your collection efficiently.</p>
+            </div>
+            <div class="search-bar">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" placeholder="Search title, author..." />
+            </div>
+        </header>
+
         <div id="library">
-        <div class="book read" onclick="toggleExpand(this)">
-            <img src="images/vinland.jpg" alt="book-cover" class="book-cover">
-            <div class="title">Vinland Saga</div>
+            <div class="book read" onclick="toggleExpand(this)">
+                <div class="book-badge read-badge">Read</div>
+                <img src="https://m.media-amazon.com/images/I/81AluFrJ+VL.jpg" alt="book-cover" class="book-cover">
+                <div class="book-info">
+                    <div class="title">Vinland Saga</div>
+                    <div class="author">Makoto Yukimura</div>
+                    
+                    <div class="book-details">
+                        <div class="detail-row"><span>Language</span> <span>Japanese</span></div>
+                        <div class="detail-row"><span>Pages</span> <span>369</span></div>
+                        <div class="detail-row"><span>Year</span> <span>2005</span></div>
+                    </div>      
+                    
+                    <button class="toggle-btn">
+                        <i class="fa-solid fa-check-circle"></i> <span class="status">Read</span>
+                    </button> 
+                </div>
+            </div>
 
-            <div class="book-details">
-                <p>✍️ Author: Makoto Yukimura</p>
-                <p>🌐 Language: Japanese</p>
-                <p><i class="fa-solid fa-file"></i> Pages: 369</p>
-                <p>📅 Year: 2005</p>
-                
-            </div>              
+            <div class="book not-read" onclick="toggleExpand(this)">
+                <div class="book-badge not-read-badge">New</div>
+                <img src="https://m.media-amazon.com/images/I/81X4R7QhFkL.jpg" alt="book-cover" class="book-cover">
+                <div class="book-info">
+                    <div class="title">Jojo's Stone Ocean</div>
+                    <div class="author">Hirohiko Araki</div>
     
-            <button class="toggle-btn">📖 <span class="status">Read</span></button> 
+                    <div class="book-details">
+                        <div class="detail-row"><span>Language</span> <span>Japanese</span></div>
+                        <div class="detail-row"><span>Pages</span> <span>287</span></div>
+                        <div class="detail-row"><span>Year</span> <span>1999</span></div>
+                    </div> 
+          
+                    <button class="toggle-btn">
+                        <i class="fa-regular fa-circle"></i> <span class="status">Not Read</span>
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="book not-read" onclick="toggleExpand(this)">
-            <img src="images/jojo.jpg" alt="book-cover" class="book-cover">
-            <div class="title">Jojo's Stone Ocean</div>
+        <button id="add-book">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+  </div>
 
-            <div class="book-details">
-                <p>✍️ Author: Hirohiko Araki</p>
-                <p>🌐 Language: Japanese</p>
-                <p><i class="fa-solid fa-file"></i> Pages: 287</p>
-                <p>📅 Year: 1999</p>
-            </div> 
-     
-            <button class="toggle-btn">📖 <span class="status">Not Read</span></button>
-        </div>
-
-        <div class="book read" onclick="toggleExpand(this)">
-            <img src="images/ippo.jpg" alt="book-cover" class="book-cover">
-            <div class="title">Hajime No Ippo</div>
-
-            <div class="book-details">
-                <p>✍️ Author: George Morikawa</p>
-                <p>🌐 Language: Japanese</p>
-                <p><i class="fa-solid fa-file"></i> Pages: 324</p>
-                <p>📅 Year: 1989</p>
-            </div> 
-            
-            <button class="toggle-btn">📖 <span class="status">Read</span></button>
-        </div>
-
-
-       <div id="modal" class="modal hidden">
+    <div id="modal" class="modal hidden">
          <div class="modal-content">
-           <span onclick="closeModal()" class="close">&times;</span>
+           <div class="modal-header">
+               <h2>Add New Book</h2>
+               <span onclick="closeModal()" class="close">&times;</span>
+           </div>
 
            <form class="book-form" id="bookForm">
-            <h2>Add a Book</h2>
+             <div class="form-group">
+               <label for="title">Title</label>
+               <input type="text" id="title" placeholder="e.g. The Hobbit" required>
+             </div>
           
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" id="title" required>
-            </div>
+             <div class="form-group">
+               <label for="author">Author</label>
+               <input type="text" id="author" placeholder="e.g. J.R.R. Tolkien" required>
+             </div>
+             
+             <div class="form-row">
+                 <div class="form-group">
+                   <label for="pages">Pages</label>
+                   <input type="number" id="pages" required>
+                 </div>
+              
+                 <div class="form-group">
+                   <label for="year">Year</label>
+                   <input type="number" id="year" required>
+                 </div>
+             </div>
           
-            <div class="form-group">
-              <label for="author">Author</label>
-              <input type="text" id="author" required>
-            </div>
+             <div class="form-group">
+               <label for="language">Language</label>
+               <input type="text" id="language" required>
+             </div>
           
-            <div class="form-group">
-              <label for="pages">Pages Count</label>
-              <input type="number" id="pages" required>
-            </div>
-          
-            <div class="form-group">
-              <label for="year">Publication Year</label>
-              <input type="number" id="year" required>
-            </div>
-          
-            <div class="form-group">
-              <label for="edition">Edition</label>
-              <input type="text" id="edition">
-            </div>
-          
-            <div class="form-group">
-              <label for="language">Language</label>
-              <input type="text" id="language" required>
-            </div>
-          
-            <button type="button" onclick="addBook()">Add Book</button>
-          </form>
-          
+             <button type="button" class="submit-btn" onclick="addBook()">Add to Library</button>
+           </form>
          </div>
-       </div>
-
-
-      <button id="add-book" >+</button>
     </div>
-
-    </div>
-
 
     <script src="script.js" defer></script>
 </body>
