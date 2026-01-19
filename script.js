@@ -1,4 +1,4 @@
-
+// 1. Book Constructor
 function Book(name, author, pages, year, language) {
     this.name = name;
     this.author = author;
@@ -8,18 +8,7 @@ function Book(name, author, pages, year, language) {
     this.id = crypto.randomUUID();
 }
 
-
-//add books to library
-// Keep your Book Constructor exactly the same...
-function Book(name, author, pages, year, language) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.year = year;
-    this.language = language;
-    this.id = crypto.randomUUID();
-}
-
+// 2. Add Book Function (Updated for Modern UI)
 function addBook() {
     const form = document.getElementById("bookForm");
 
@@ -28,6 +17,7 @@ function addBook() {
         return;
     }
 
+    // Get values
     const title = document.getElementById("title").value.trim();
     const author = document.getElementById("author").value.trim();
     const pages = document.getElementById("pages").value.trim();
@@ -36,27 +26,29 @@ function addBook() {
 
     const newBook = new Book(title, author, pages, year, language);
 
-    // --- NEW DOM CREATION LOGIC TO MATCH MODERN CSS ---
-
+    // Create the HTML structure for the new book
     const library = document.getElementById("library");
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book", "not-read");
+    
+    // Add expand functionality
     bookDiv.onclick = function() { toggleExpand(this); };
 
-    // 1. Badge
+    // --- Badge ---
     const badge = document.createElement("div");
     badge.classList.add("book-badge");
     badge.textContent = "New";
     bookDiv.appendChild(badge);
 
-    // 2. Cover Image
+    // --- Image ---
     const coverImg = document.createElement("img");
-    coverImg.src = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=300&h=400"; // Generic nice book image
+    // Using a placeholder image for new books
+    coverImg.src = "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=300&h=400"; 
     coverImg.alt = "book-cover";
     coverImg.classList.add("book-cover");
     bookDiv.appendChild(coverImg);
 
-    // 3. Info Wrapper
+    // --- Info Container ---
     const infoDiv = document.createElement("div");
     infoDiv.classList.add("book-info");
 
@@ -71,130 +63,114 @@ function addBook() {
     authorDiv.textContent = newBook.author;
     infoDiv.appendChild(authorDiv);
 
-    // Details Section (Using flex rows for alignment)
+    // Details Section (Hidden by default)
     const bookDetails = document.createElement("div");
     bookDetails.classList.add("book-details");
 
-    const detailsData = [
-        { label: "Language", value: newBook.language },
-        { label: "Pages", value: newBook.pages },
-        { label: "Year", value: newBook.year }
-    ];
-
-    detailsData.forEach(item => {
+    // Helper to create rows
+    const createRow = (label, value) => {
         const row = document.createElement("div");
         row.classList.add("detail-row");
-        
-        const labelSpan = document.createElement("span");
-        labelSpan.textContent = item.label;
-        
-        const valueSpan = document.createElement("span");
-        valueSpan.textContent = item.value;
+        row.innerHTML = `<span>${label}</span> <span>${value}</span>`;
+        return row;
+    };
 
-        row.appendChild(labelSpan);
-        row.appendChild(valueSpan);
-        bookDetails.appendChild(row);
-    });
-
+    bookDetails.appendChild(createRow("Language", newBook.language));
+    bookDetails.appendChild(createRow("Pages", newBook.pages));
+    bookDetails.appendChild(createRow("Year", newBook.year));
+    
     infoDiv.appendChild(bookDetails);
 
-    // Toggle Button
+    // --- Toggle Button ---
     const toggleButton = document.createElement("button");
     toggleButton.classList.add("toggle-btn");
-    
-    // Add event listener immediately
-    toggleButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isRead = bookDiv.classList.toggle("read");
-        bookDiv.classList.toggle("not-read");
-        
-        // Update Icon and Text
-        toggleButton.innerHTML = isRead 
-            ? '<i class="fa-solid fa-check-circle"></i> <span class="status">Read</span>' 
-            : '<i class="fa-regular fa-circle"></i> <span class="status">Not Read</span>';
-            
-        // Update Badge color via CSS class
-        badge.style.backgroundColor = isRead ? "var(--success)" : "var(--text-muted)";
-        badge.textContent = isRead ? "Read" : "Not Read";
-    });
-
-    // Initial Button State
     toggleButton.innerHTML = '<i class="fa-regular fa-circle"></i> <span class="status">Not Read</span>';
-    infoDiv.appendChild(toggleButton);
+    
+    toggleButton.onclick = (e) => {
+        e.stopPropagation(); // Crucial: prevents expansion
+        handleToggleRead(toggleButton, bookDiv, badge);
+    };
 
+    infoDiv.appendChild(toggleButton);
     bookDiv.appendChild(infoDiv);
+    
+    // Add to library grid
     library.appendChild(bookDiv);
 
+    // Reset and Close
     form.reset();
-    closeModal(); // Auto close modal on success
+    closeModal();
 }
 
-
- //read toggle button
- const toggleButtons = document.querySelectorAll('.toggle-btn');
-
- toggleButtons.forEach(button => {
-   button.addEventListener('click', (e) => {
-     e.stopPropagation();
-     const book = button.parentElement;
-     const status = book.querySelector('.status');
-
-     if (book.classList.contains('read')) {
-       book.classList.remove('read');
-       book.classList.add('not-read');
-       status.textContent = 'Not Read';
-     } else {
-       book.classList.remove('not-read');
-       book.classList.add('read');
-       status.textContent = 'Read';
-     }
-   });
- });
-
- //expand details
- function toggleExpand(card) {
-  card.classList.toggle("expanded");
+// 3. Helper Functions
+function toggleExpand(card, event) {
+    // FIX: If the user clicked the toggle-btn or an icon inside it, do NOT expand
+    if (event.target.closest('.toggle-btn')) return;
+    
+    card.classList.toggle("expanded");
 }
 
+function closeModal() {
+    const modal = document.getElementById("modal");
+    if(modal) modal.classList.add("hidden");
+}
 
- //favorite toggle button
- //code...
+function handleToggleRead(button, bookDiv, badge) {
+    const isRead = bookDiv.classList.toggle("read");
+    bookDiv.classList.toggle("not-read");
+    
+    // Update Button Icon and Text
+    button.innerHTML = isRead 
+        ? '<i class="fa-solid fa-check-circle"></i> <span class="status">Read</span>' 
+        : '<i class="fa-regular fa-circle"></i> <span class="status">Not Read</span>';
+        
+    // Update Top Right Badge
+    if (badge) {
+        badge.textContent = isRead ? "Read" : "Not Read";
+        // Manual color override since your CSS uses classes
+        badge.className = isRead ? "book-badge read-badge" : "book-badge not-read-badge";
+    }
+}
 
+// 4. Global Event Listeners (Run when page loads)
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // FIX: Setup existing books (Vinland Saga, Ippo, etc.)
+    const existingBooks = document.querySelectorAll('.book');
+    existingBooks.forEach(book => {
+        // Fix the click to expand
+        book.onclick = (e) => toggleExpand(book, e);
 
- //form pop up page
-document.getElementById("add-book").addEventListener("click", function () {
-  document.getElementById("modal").classList.remove("hidden");
+        // Fix the existing toggle button
+        const btn = book.querySelector('.toggle-btn');
+        const badge = book.querySelector('.book-badge');
+        
+        if (btn) {
+            btn.onclick = (e) => {
+                e.stopPropagation(); // Stops the card from expanding
+                handleToggleRead(btn, book, badge);
+            };
+        }
+    });
+
+    // --- Modal Logic ---
+    const addBtn = document.getElementById("add-book");
+    const modal = document.getElementById("modal");
+
+    if (addBtn && modal) {
+        addBtn.addEventListener("click", () => {
+            modal.classList.remove("hidden");
+        });
+    }
+
+    // --- Welcome Overlay Logic ---
+    const overlay = document.getElementById('welcome-overlay');
+    const message = document.getElementById('welcome-message');
+    if(overlay) {
+        setTimeout(() => { message?.classList.remove('hidden'); }, 100);
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 1000);
+        }, 2500);
+    }
 });
-
- function closeModal() {
-  document.getElementById("modal").classList.add("hidden");
-}
-
-
-//welcome pop up 
-
-window.addEventListener('load', () => {
-  const message = document.getElementById('welcome-message');
-  const overlay = document.getElementById('welcome-overlay');
-
-  // Force a reflow to ensure animation triggers
-  void message.offsetWidth; // triggers reflow
-
-  // Animate in
-  message.classList.remove('hidden');
-  message.classList.add('visible');
-
-  // Fade out overlay after 3 seconds
-  setTimeout(() => {
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-    }, 1000); // matches CSS fade duration
-  }, 3000);
-});
-
-
-
-
-
-
